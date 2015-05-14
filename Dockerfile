@@ -3,7 +3,7 @@ MAINTAINER Matej Kramny <matej@matej.me>
 
 RUN apt-get update
 RUN apt-get install -y apache2 php-pear php5-curl php5-mysql php5-odbc php5-imagick php5-mcrypt mysql-client curl git postfix libsasl2-modules rsyslog python-setuptools libapache2-mod-php5 php5-imap
-RUN apt-get install -y imagemagick php5-imagick php5-gd
+RUN apt-get install -y imagemagick php5-imagick php5-gd php5-dev
 RUN pear install Mail Mail_Mime Net_SMTP Net_Socket Spreadsheet_Excel_Writer XML_RPC
 RUN php5enmod mcrypt
 
@@ -14,6 +14,14 @@ RUN a2enmod rewrite
 RUN a2enmod php5
 
 RUN rm -f /etc/apache2/sites-enabled/000-default.conf
+
+WORKDIR /tmp
+RUN git clone git://github.com/phpredis/phpredis.git
+WORKDIR phpredis
+RUN phpize
+RUN ./configure
+RUN make && make install
+RUN echo 'extension=redis.so' >> /etc/php5/apache2/php.ini
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 ADD conf/website.conf /etc/apache2/conf.d/website.conf
