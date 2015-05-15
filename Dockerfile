@@ -23,7 +23,7 @@ RUN ./configure
 RUN make && make install
 RUN echo 'extension=redis.so' >> /etc/php5/apache2/php.ini
 
-ADD conf/supervisord.conf /etc/supervisord.conf
+ADD conf/supervisord.conf /etc/supervisor/supervisord.conf
 ADD conf/website.conf /etc/apache2/conf.d/website.conf
 ADD conf/httpd.conf /etc/apache2/apache2.conf
 ADD conf/php.ini /etc/php5/apache2/php.ini
