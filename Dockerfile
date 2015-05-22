@@ -21,7 +21,6 @@ WORKDIR phpredis
 RUN phpize
 RUN ./configure
 RUN make && make install
-RUN echo 'extension=redis.so' >> /etc/php5/apache2/php.ini
 
 ADD conf/supervisord.conf /etc/supervisor/supervisord.conf
 ADD conf/website.conf /etc/apache2/conf.d/website.conf
