@@ -4,6 +4,8 @@ MAINTAINER Matej Kramny <matej@matej.me>
 RUN apt-get remove -y postfix rsyslog supervisor
 RUN a2enmod ssl
 
+RUN rm /etc/lamp.sh /etc/apache2/apache2.conf
+
 ADD conf/httpd.conf /etc/apache2/apache2.conf
 ADD conf/php.ini /etc/php5/apache2/php.ini
 ADD conf/lamp.sh /etc/lamp.sh
