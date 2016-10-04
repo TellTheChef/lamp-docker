@@ -9,10 +9,10 @@ ADD conf/php.ini /etc/php5/apache2/php.ini
 ADD conf/lamp.sh /etc/lamp.sh
 RUN chmod +x /etc/lamp.sh
 
-RUN apachectl configtest
+#RUN apachectl configtest
 RUN rm -rf /var/www
 
-#RUN service apache2 stop
+RUN service apache2 stop
 
 EXPOSE 80
 EXPOSE 443
